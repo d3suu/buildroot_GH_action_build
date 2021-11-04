@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Update apt repo
+        run: sudo apt update
       - name: Install dependency
-        run: apt update && apt install -y libelf-dev libssl-dev
+        run: sudo apt install -y libelf-dev libssl-dev
       - name: Build buildroot
         run: make -j4
       - uses: actions/upload-artifact@v2
