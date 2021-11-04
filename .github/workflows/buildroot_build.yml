@@ -1,0 +1,19 @@
+name: buildroot 2021.02.6 build x86_64 iso
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v2
+      - name: Install dependency
+        run: apt update && apt install -y libelf-dev libssl-dev
+      - name: Build buildroot
+        run: make -j4
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build ISO
+          path: output/images/
+          
